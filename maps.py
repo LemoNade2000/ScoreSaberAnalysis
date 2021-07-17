@@ -1,48 +1,39 @@
 ## pick and categorize maps for further usage.
 
-import base
-import requests
+import BaseClasses
 import json
-import sys
 import pandas as pd
-import numpy as np
 import csv
 
-table = pd.read_csv (r'RankedSongs.csv', encoding= 'unicode_escape')
+table = pd.read_csv(r'./CsvData/RankedSongs.csv', encoding= 'unicode_escape') 
 mapTable = table.values
 topMapList = [] ## list of 50 maps with top pps
-firstAccList = [] ## list of maps with 0~1 star range, and so on
-secondAccList = [] 
-thirdAccList = []
-fourthAccList = []
-fifthAccList = []
+MapList0to1Star = [] ## list of 50 maps with 0-1 star acc
+MapList1to2Star = [] ## list of 50 maps with 1-2 star acc
+MapList2to3Star = [] ## list of 50 maps with 2-3 star acc
+MapList3to4Star = [] ## list of 50 maps with 3-4 star acc
+MapList4to5Star = [] ## list of 50 maps with 4-5 star acc
 
-topScores = open("Scores.csv", 'w')
-mapList= []
-mapList.append("Rank")
+topScores = open("./CsvData/Scores.csv", 'w')
+mapList = ["Rank"]
 
 for ind in table.index:
-    curMap = base.map()
-    curMap.diff = mapTable[ind, 2]
-    curMap.hash = mapTable[ind, 16]
+    curMap = BaseClasses.map()
+    curMap.diff = mapTable[ind, 2] # RankedSongs.csv column 2, Level(difficulty)
+    curMap.hash = mapTable[ind, 16] # RankedSongs.csv column 16, ID(hash)
 
     if mapTable[ind, 6] >= 10:
         topMapList.append(curMap)
-
     elif mapTable[ind, 6] <= 1:
-        firstAccList.append(curMap)
-
+        MapList0to1Star.append(curMap)
     elif mapTable[ind, 6] <= 2:
-        secondAccList.append(curMap)
-
+        MapList1to2Star.append(curMap)
     elif mapTable[ind, 6] <= 3:
-        thirdAccList.append(curMap)
-
+        MapList2to3Star.append(curMap)
     elif mapTable[ind, 6] <= 4:
-        fourthAccList.append(curMap)
-        
+        MapList3to4Star.append(curMap)     
     elif mapTable[ind, 6] <= 1:
-        fifthAccList.append(curMap)
+        MapList4to5Star.append(curMap)
     
     mapList.append(curMap.hash + curMap.diff)
 
@@ -54,63 +45,59 @@ for map in topMapList :
     else:
         topMapDict[map.hash].append(map.diff)
     
-with open('topMaps.json', 'w') as fp:
-    json.dump(topMapDict, fp, indent= 4)
+with open('./JsonData/topMaps.json', 'w') as fp:
+    json.dump(topMapDict, fp, indent=4)
 
-firstAccDict = {}
-for map in firstAccList :
-    if map.hash not in firstAccDict:
-        firstAccDict[map.hash] = [map.diff]
+MapDict0to1Stars = {}
+for map in MapList0to1Star :
+    if map.hash not in MapDict0to1Stars:
+        MapDict0to1Stars[map.hash] = [map.diff]
     else:
-        firstAccDict[map.hash].append(map.diff)
+        MapDict0to1Stars[map.hash].append(map.diff)
     
-with open('firstAccMaps.json', 'w') as fp:
-    json.dump(firstAccDict, fp, indent= 4)
+with open('./JsonData/Maps0to1Stars.json', 'w') as fp:
+    json.dump(MapDict0to1Stars, fp, indent=4)
 
 
-secondAccDict = {}
-for map in secondAccList :
-    if map.hash not in secondAccDict:
-        secondAccDict[map.hash] = [map.diff]
-    
+MapDict1to2Stars = {}
+for map in MapList1to2Star :
+    if map.hash not in MapDict1to2Stars:
+        MapDict1to2Stars[map.hash] = [map.diff]
     else:
-        secondAccDict[map.hash].append(map.diff)
+        MapDict1to2Stars[map.hash].append(map.diff)
     
-with open('secondAccMaps.json', 'w') as fp:
-    json.dump(secondAccDict, fp, indent= 4)
+with open('./JsonData/Maps1to2Stars.json', 'w') as fp:
+    json.dump(MapDict1to2Stars, fp, indent= 4)
 
-thirdAccDict= {}
-for map in thirdAccList :
-    if map.hash not in thirdAccDict:
-        thirdAccDict[map.hash] = [map.diff]
-    
+MapDict2to3Stars = {}
+for map in MapList2to3Star :
+    if map.hash not in MapDict2to3Stars:
+        MapDict2to3Stars[map.hash] = [map.diff]
     else:
-        thirdAccDict[map.hash].append(map.diff)
+        MapDict2to3Stars[map.hash].append(map.diff)
     
-with open('thirdAccMaps.json', 'w') as fp:
-    json.dump(thirdAccDict, fp, indent= 4)
+with open('./JsonData/Maps2to3Stars.json', 'w') as fp:
+    json.dump(MapDict2to3Stars, fp, indent= 4)
 
-fourthAccDict= {}
-for map in fourthAccList :
-    if map.hash not in fourthAccDict:
-        fourthAccDict[map.hash] = [map.diff]
-    
+MapDict3to4Stars= {}
+for map in MapList3to4Star :
+    if map.hash not in MapDict3to4Stars:
+        MapDict3to4Stars[map.hash] = [map.diff]
     else:
-        fourthAccDict[map.hash].append(map.diff)
+        MapDict3to4Stars[map.hash].append(map.diff)
     
-with open('fourthAccMaps.json', 'w') as fp:
-    json.dump(fourthAccDict, fp, indent= 4)
+with open('./JsonData/Maps3to4Stars.json', 'w') as fp:
+    json.dump(MapDict3to4Stars, fp, indent= 4)
 
-fifthAccDict = {}
-for map in fifthAccList :
-    if map.hash not in fifthAccDict:
-        fifthAccDict[map.hash] = [map.diff]
-    
+MapDict4to5Stars = {}
+for map in MapList4to5Star :
+    if map.hash not in MapDict4to5Stars:
+        MapDict4to5Stars[map.hash] = [map.diff]
     else:
-        fifthAccDict[map.hash].append(map.diff)
+        MapDict4to5Stars[map.hash].append(map.diff)
     
-with open('fifthAccMaps.json', 'w') as fp:
-    json.dump(fifthAccDict, fp, indent= 4)
+with open('./JsonData/Maps4to5Stars.json', 'w') as fp:
+    json.dump(MapDict4to5Stars, fp, indent= 4)
 
 writer = csv.writer(topScores)
 writer.writerow(mapList)
