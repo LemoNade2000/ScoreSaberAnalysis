@@ -1,10 +1,5 @@
 ## base classes used
 
-import requests
-import json
-import sys
-import pandas
-
 class map:
     def __init__(self):
         self.hash = ""
