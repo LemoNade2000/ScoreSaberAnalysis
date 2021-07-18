@@ -9,6 +9,8 @@ Existing data was last gathered on 16/07/21 as JSON(everything except the ranked
 
 If you have any suggestions or questions, I'm open to anything within my capability.
 
+You can perform simple two map correlation test now.
+
 # Features to be added.
 
 Simple analysis regarding scores, and tool used for it.
