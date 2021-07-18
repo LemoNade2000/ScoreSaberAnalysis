@@ -10,6 +10,5 @@ Existing data was last gathered on 16/07/21 as JSON(everything except the ranked
 If you have any suggestions or questions, I'm open to anything within my capability.
 
 # Features to be added.
-Data integrity check. (To make sure that all data is there, without duplication)
 
 Simple analysis regarding scores, and tool used for it.
