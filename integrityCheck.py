@@ -6,11 +6,9 @@ import pandas as pd
 import numpy as np
 import requests
 
-def missingData():
+def missingData(scoreTable):
     checklist = []
     checklist = random.sample(range(1, 1000), 100)
-    scores = pd.read_csv(r'./CsvData/Scores.csv', encoding='unicode_escape', error_bad_lines=False)
-    scoreTable = scores.values
     player_file = open(r'./JsonData/topPlayers.json')
     player_json = json.load(player_file)
 
@@ -21,9 +19,7 @@ def missingData():
     
     return True
 
-def findDuplicate():
-    scores = pd.read_csv(r'./CsvData/Scores.csv', encoding='unicode_escape', error_bad_lines=False)
-    scoreTable = scores.values
+def findDuplicate(scoreTable):
     pureScores = scoreTable[:, 1:]
     checkedScores = []
     checkedScores = set()
@@ -36,7 +32,10 @@ def findDuplicate():
         print("List of unique indexes are as follows.")
         print(uniqueList)
 
-if missingData():
+scores = pd.read_csv(r'./CsvData/Scores.csv', encoding='unicode_escape', error_bad_lines=False)
+scoreTable = scores.values
+
+if missingData(scoreTable):
     print("No missing data.")
 
-findDuplicate()
+findDuplicate(scoreTable)
