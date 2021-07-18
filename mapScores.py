@@ -53,4 +53,4 @@ def mapScores(playerRankStart, playerRankEnd):
 
     scores.close()
 
-mapScores(1, 1000) ## put range of ranked players that you want to get scores of.
+mapScores(1, 1001) ## put range of ranked players that you want to get scores of.
