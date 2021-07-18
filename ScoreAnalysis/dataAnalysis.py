@@ -16,7 +16,7 @@ def twoMapCorr(hash1 = "21A989606D52EDF96B2971DBEDE366B1D0523088Expert", hash2 =
     for i in range(1001):
         if mapScores[i][0] <= boundaryScore or mapScores[i][1] <= boundaryScore : ## arbitrary boundary for what one may consider "cleared"
             zeroIndex.append(i)
-    mapScores = np.delete(mapScores, zeroIndex, axis = 0)
+    ##mapScores = np.delete(mapScores, zeroIndex, axis = 0)
     firstMapScores = mapScores[:, 0]
     secondMapScores = mapScores[:, 1]
     r = np.corrcoef(firstMapScores, secondMapScores)
@@ -24,4 +24,7 @@ def twoMapCorr(hash1 = "21A989606D52EDF96B2971DBEDE366B1D0523088Expert", hash2 =
     plt.scatter(firstMapScores, secondMapScores)
     plt.show()
 
-twoMapCorr(boundaryScore = 0.85) ## default map x = Felis Expert, y = Donut Hole Expert+, with boundary being 0.85
+
+hash1 = "F402008042EFACA4291A6633EBB6B562E4ADCD87Expert+"
+hash2 = "4F003B1A4144A7AF68FA1F846D480239B2BC5CA2Expert"
+twoMapCorr(hash1, hash2, boundaryScore = 0.85) ## default map x = Felis Expert, y = Donut Hole Expert+, with boundary being 0.85
