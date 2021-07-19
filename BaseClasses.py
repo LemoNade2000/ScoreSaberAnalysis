@@ -4,7 +4,10 @@ class map:
     def __init__(self):
         self.hash = ""
         self.diff = ""
-
+        self.name = ""
+        self.author = ""
+        self.correlatedMaps = []
+        self.star = 0
 class mapScore:
     def __init__(self):
         self.map = map
