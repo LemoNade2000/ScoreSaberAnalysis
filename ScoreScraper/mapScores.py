@@ -53,4 +53,30 @@ def mapScores(playerRankStart, playerRankEnd):
 
     scores.close()
 
+def getPP():
+
+    df = pd.read_csv(r"./CsvData/Scores.csv")
+    df["PP"] = 0
+
+    jsonFile = open(r"./JsonData/topPlayers.json")
+    playerDict = json.load(jsonFile)
+
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+    cols = df.columns.tolist()
+    cols = cols[:1] + cols[-1:] + cols[2:-1]
+    df = df[cols]
+    dt = df.values
+
+    ppIndex = cols.index("PP")
+    for i in range (1,1001):
+        player = playerDict[str(i)]
+        responseAPI = requests.get("https://new.scoresaber.com/api/player/" + player + "/basic")
+        json_Data = responseAPI.json()
+        dt[i][ppIndex] = json_Data["playerInfo"]["pp"]
+    
+    df = pd.DataFrame(dt, columns = cols)
+    df.to_csv(r"./CsvData/Scores.csv")
+
+
 mapScores(1, 1001) ## put range of ranked players that you want to get scores of.
+getPP()
