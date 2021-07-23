@@ -9,9 +9,8 @@ from scipy import stats
 import csv
 from matplotlib import pyplot as plt
 import json
+import multiprocessing
 
-
-mapList = list(pd.read_csv("./CsvData/Scores.csv", nrows=1))
 
 def twoMapCorr(hash1 = "21A989606D52EDF96B2971DBEDE366B1D0523088Expert", hash2 = "42C10857AF7E114C71A1B9F598E8462BA07C3DC1Expert+", boundaryScore = 0.8):
     mapList = list(pd.read_csv("./CsvData/Scores.csv", nrows=1))
@@ -102,7 +101,8 @@ def corrMaps(hash1):
         try: secondTest = twoMapCorr(hash1, maps)
         except: continue
         (r2, n2) = secondTest
-        result = fisherZdiff(r1, r2, n1, n2, 0.1)
+        try: result = fisherZdiff(r1, r2, n1, n2, 0.1)
+        except: continue
         if (result[0]) == False:
             tuple = (maps, result[1])
             correlatedMaps.append(tuple)
@@ -115,16 +115,11 @@ def corrMaps(hash1):
     with open(path, 'w') as fp:
         json.dump(currMap.__dict__, fp, indent=4)
 
-corrMaps("F4DA02BFEC50EFDE4F2A1E4B89251E654B9C7353Expert+")
-
-# hash1 = "558FD3C73D5F7E5BBBF1616760E099EBCFD75903Expert+"
-# hash2 = "F4DA02BFEC50EFDE4F2A1E4B89251E654B9C7353Expert+"
-
-# firstTest = ppMapCorr(hash1, boundaryScore=1.7)
-# secondTest = twoMapCorr(hash1, hash2, boundaryScore = 0.7) ## default map x = Felis Expert, y = Donut Hole Expert+, with boundary being 0.85
-# (r1, n1) = firstTest
-# (r2, n2) = secondTest
-# if(fisherZdiff(r1, r2, n1, n2, 0.1)[0]):
-#     print("There is no significant evidence to reject the hypothesis that the correlation between two maps is same as the correlation between the map and PP.")
-# else: print("There is enough statistical evidence to reject the hypothesis that the correlation between the two maps and the correlation between the map and PP is the same")
-
+mapList = list(pd.read_csv("./CsvData/Scores.csv", nrows=1))
+mapList.remove("PP")
+mapList.remove("Rank")
+mapList = mapList[100:500]
+if __name__ == '__main__':
+    pool = multiprocessing.Pool(processes = 8)
+    pool.map(corrMaps, mapList)
+    pool.close()

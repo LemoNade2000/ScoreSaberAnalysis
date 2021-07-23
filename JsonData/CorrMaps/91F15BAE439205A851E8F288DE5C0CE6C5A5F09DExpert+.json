@@ -1,0 +1,33 @@
+{
+    "hash": "91F15BAE439205A851E8F288DE5C0CE6C5A5F09D",
+    "diff": "Expert+",
+    "name": "Schwank - Monolith by Schwank vs. Narwhal",
+    "author": "Schwank vs. Narwhal",
+    "correlatedMaps": [
+        [
+            "E5D18576630941A62F199C1CBAB3CA4F869A7416Expert+",
+            2.867983876229534
+        ],
+        [
+            "4000546C46A9E28036E788704D235E7CFF56225CExpert+",
+            1.7096557328611255
+        ],
+        [
+            "0BB0D5B03D0FDBA8B7CF881694EF701D38B875FAExpert+",
+            1.4668524642317968
+        ],
+        [
+            "9C7201C25290E8DE798770EAB374F0249B1BCEE5Expert+",
+            1.437964923350367
+        ],
+        [
+            "23328A868C4C13C72E191A77EB42622D551EF5ACExpert",
+            1.411710016958601
+        ],
+        [
+            "EBB91D7AFD6EEDEC01D245A305693CB8AA60121DExpert+",
+            1.386355246016081
+        ]
+    ],
+    "star": 10.58
+}
