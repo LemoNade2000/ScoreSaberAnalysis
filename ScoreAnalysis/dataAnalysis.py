@@ -118,7 +118,7 @@ def corrMaps(hash1):
 mapList = list(pd.read_csv("./CsvData/Scores.csv", nrows=1))
 mapList.remove("PP")
 mapList.remove("Rank")
-mapList = mapList[100:500]
+mapList = mapList[2300:]
 if __name__ == '__main__':
     pool = multiprocessing.Pool(processes = 8)
     pool.map(corrMaps, mapList)
