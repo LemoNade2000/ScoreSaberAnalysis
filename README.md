@@ -14,3 +14,7 @@ You can perform simple two map correlation test now.
 # Features to be added.
 
 Simple analysis regarding scores, and tool used for it.
+
+# Graph Visualization
+
+You can use the gexf file to generate graph via Gephi. You may want to use other tools if you want to.
